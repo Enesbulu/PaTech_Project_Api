@@ -6,7 +6,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-	</PropertyGroup>
+		<InvariantGlobalization>false</InvariantGlobalization>
+	  <UserSecretsId>bab2c319-b8dc-4d67-ba1b-01e79d3020d1</UserSecretsId>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />

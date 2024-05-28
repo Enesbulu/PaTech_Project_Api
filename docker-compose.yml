@@ -1,10 +1,37 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
 
+# version: '3.4'
+
+# services:
+#   webapi:
+#     image: webapi
+#     build:
+#       context: .
+#       dockerfile: src/projects/testApi3/webAPI/Dockerfile
+#     ports:
+#       - 5151:5151
+#     restart: always
+#     depends_on:
+#       - mssqldb
+#     platform: linux/amd64 # Doğru platformu belirtin
+      
+    
+#   mssqldb: 
+#     image: "mcr.microsoft.com/mssql/server"
+#     environment:
+#       # - MSSQL_PID=Developer
+#       # - MSSQL_AUTHENTICATION=ActiveDirectoryPassword
+#       - SA_PASSWORD= "sAdmin123"
+#       - ACCEPT_EULA= "Y"
+#     ports:
+#       - "1433:1433"
+#     platform: linux/amd64
+
 version: '3.4'
 
 services:
   webapi:
-    image: webapi
+    # image: webapi
     build:
       context: .
       dockerfile: src/projects/testApi3/webAPI/Dockerfile
@@ -13,14 +40,23 @@ services:
     restart: always
     depends_on:
       - mssqldb
-    
+    # platform: linux/amd64
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # Geliştirme ortamı için daha ayrıntılı loglar sağlar
+      - LANG=en_US.UTF-8
+      - ConnectionString=Data Source=mssqldb;Initial Catalog=Clean;User ID=sa;Password=sAdmin123;TrustServerCertificate=true
+    volumes:
+      - ./src/projects/testApi3/webAPI:/app
+ 
+
   mssqldb: 
     image: "mcr.microsoft.com/mssql/server"
     environment:
-      - MSSQL_PID=Developer
-      - MSSQL_AUTHENTICATION=ActiveDirectoryPassword
-      - SA_PASSWORD: "sAdmin123"
-      - ACCEPT_EULA: "Y"
+      - SA_PASSWORD=sAdmin123
+      - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
+    restart: always
+    platform: linux/amd64
+
 

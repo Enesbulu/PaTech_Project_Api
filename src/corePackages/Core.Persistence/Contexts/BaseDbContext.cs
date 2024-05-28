@@ -14,7 +14,7 @@ namespace Core.Persistence.Contexts
         private readonly IHttpContextAccessor _httpContextAccessor;
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(dbContextOptions)
         {
-            Configuration = configuration;
+                Configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
